@@ -1,7 +1,7 @@
 // Variáveis e seleção de elementos
 const apikey = "fcad188101912a8d02002e4f173f6f6a";
 const apiCountryURL = "https://flagsapi.com/";
-const accessKeyUnsplash = "zeA0f7uTXuwzbmC6i27FlijyZr9ze3Dq1bf1LDiqjSQ"; // Sua chave da Unsplash
+const accessKeyUnsplash = "zeA0f7uTXuwzbmC6i27FlijyZr9ze3Dq1bf1LDiqjSQ"; 
 
 const cityInput = document.querySelector("#city-input");
 const searchBtn = document.querySelector("#search");
