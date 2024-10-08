@@ -1,0 +1,13 @@
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+.temp {
+   color: rgb(3, 83, 202);
+}
+
+#atualmente p {
+    display: flex;
+    align-items: center;
+}
