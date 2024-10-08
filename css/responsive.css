@@ -1,0 +1,19 @@
+@media (max-width: 480px) {
+    #temperature {
+        font-size: 2rem;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 1rem;
+        margin: 0 1rem;
+    }
+
+    #weather-data h2 {
+        font-size: 1.2rem;
+    }
+
+    #suggestions button {
+        min-width: 120px;
+    }
+}
