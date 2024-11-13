@@ -93,3 +93,5 @@ clima/
 ## 📜 Licença
 
 Este projeto é licenciado sob a [Licença MIT](./LICENSE).
+
+## Desenvolvido por Brian Muniz Silveira - Um projeto de aprendizado para consumir APIs e criar interfaces web dinâmicas.
