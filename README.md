@@ -88,7 +88,7 @@ clima/
 
 ## 🎨 **Captura de Tela**
 
-![Captura de tela](https://i.imgur.com/DPxQOjL.png)
+![Captura de tela](https://i.imgur.com/I1WzunA.png)
 
 ## 📜 Licença
 
