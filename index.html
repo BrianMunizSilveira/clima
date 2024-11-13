@@ -32,7 +32,7 @@
         <div class="form-input-container">
           <input
           type="text"
-          placeholder="Digite o nome da cidade"
+          placeholder="Digite o nome de uma cidade"
           id="city-input"
         />
         <button id="search">
@@ -61,18 +61,27 @@
       <div id="error-message" class="hide">
         <p>Não foi possível encontrar o clima de uma cidade com este nome.</p>
       </div>
-      <div id="loader" class="hide">
+      <div id="loading-overlay" class="hide">
         <i class="fa-solid fa-spinner"></i>
-      </div>
+      </div>      
       <div id="suggestions">
-        <button id="viena">Viena</button>
-        <button id="copenhague">Copenhague</button>
-        <button id="zurique">Zurique</button>
-        <button id="vancouver">Vancouver</button>
-        <button id="genebra">Genebra</button>
-        <button id="frankfurt">Frankfurt</button>
-        <button id="osaka">Osaka</button>
-        <button id="maceio">Maceió</button>
+        <div class="form-input-container">
+          <label for="continent-select">Escolha um continente:</label>
+          <select id="continent-select">
+              <option value="">Selecione o continente</option>
+              <option value="america">América</option>
+              <option value="europa">Europa</option>
+              <option value="asia">Ásia</option>
+              <option value="africa">África</option>
+              <option value="oceania">Oceania</option>
+          </select>
+      </div>
+      <div class="form-input-container">
+          <label for="city-select">Escolha uma cidade:</label>
+          <select id="city-select" disabled>
+              <option value="">Selecione uma cidade</option>
+          </select>
+      </div>
       </div>
     </div>
   </body>

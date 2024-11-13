@@ -1,19 +1,49 @@
 @media (max-width: 480px) {
-  #temperature {
-    font-size: 2rem;
+  body {
+    font-size: 0.8rem; /* Ajustar a fonte para telas pequenas */
   }
 
-  .container {
-    max-width: 100%;
-    padding: 1rem;
-    margin: 0 1rem;
+  .form h3 {
+    font-size: 1.1rem; /* Ajustar o título para telas pequenas */
+  }
+
+  .form input,
+  .form button {
+    padding: 0.5rem; /* Ajustar o tamanho dos inputs e botões */
+    font-size: 0.8rem; /* Ajustar a fonte */
   }
 
   #weather-data h2 {
-    font-size: 1.2rem;
+    font-size: 0.9rem; /* Ajustar o tamanho do título */
+  }
+
+  #temperature {
+    font-size: 2rem; /* Ajustar a temperatura */
+  }
+
+  #description-container p {
+    font-size: 0.9rem; /* Ajustar a descrição */
+  }
+
+  #details-container {
+    flex-direction: column; /* Continuar com a coluna para telas pequenas */
+    padding: 0.5rem;
+  }
+
+  #humidity,
+  #wind {
+    font-size: 0.8rem; /* Ajustar as informações de clima */
+  }
+
+  /* Ajustar o layout das sugestões */
+  #suggestions {
+    flex-direction: column; /* Organizar as sugestões verticalmente */
+    gap: 1rem;
+    justify-content: center;
   }
 
   #suggestions button {
-    min-width: 120px;
+    font-size: 0.8rem; /* Reduzir o tamanho do botão */
+    padding: 0.4rem 0.6rem; /* Ajustar o padding */
   }
 }
