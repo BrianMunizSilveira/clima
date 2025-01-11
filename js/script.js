@@ -1,6 +1,6 @@
 // Chaves de API
-const apikey = "SUA_CHAVE_AQUI"; // Adicione sua Chave da API da OpenWeatherMap nesta linha.
-const accessKeyUnsplash = "SUA_CHAVE_AQUI"; // Adicione sua da Chave de API da Unsplash nesta linha.
+const apikey = "fcad188101912a8d02002e4f173f6f6a";
+const accessKeyUnsplash = "zeA0f7uTXuwzbmC6i27FlijyZr9ze3Dq1bf1LDiqjSQ";
 
 // Seleção de elementos
 const apiCountryURL = "https://flagsapi.com/";
