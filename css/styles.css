@@ -1,164 +1,548 @@
-/* Geral */
+/* styles.css */
+
+/* Reset básico e fonte */
 * {
   padding: 0;
   margin: 0;
   font-family: "Ubuntu", sans-serif;
+  box-sizing: border-box;
 }
 
+/* Corpo da página */
 body {
-  background: linear-gradient(180deg, #6a11cb 0%, #2575fc 100%);
+  background: linear-gradient(120deg, #121212 0%, #2c3e50 100%);
   color: #ffffff;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
-  animation: gradientAnimation 15s ease infinite;
+  background-attachment: fixed;
+  padding: 20px;
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Animação do Gradiente */
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.hide {
-  display: none !important;
-}
-
-/* Container Principal */
+/* Container principal */
 .container {
-  background-color: rgba(34, 34, 34, 0.85); /* Fundo escuro semi-transparente */
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 10px 15px;
+  background-color: rgba(34, 34, 34, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(106, 17, 203, 0.3);
   padding: 2.5rem;
-  border-radius: 15px;
-  max-width: 420px;
+  border-radius: 20px;
+  max-width: 480px;
   text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Cabeçalho */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  max-width: 800px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logo i {
+  font-size: 2.5rem;
+  color: #ffd700;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+}
+
+/* Título do app */
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #ffffff, #ffd700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtítulo */
+.app-subtitle {
+  font-size: 1rem;
+  color: #e0e0e0;
+  font-weight: 300;
+}
+
+/* Toggle de tema */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.theme-toggle i {
+  font-size: 1.5rem;
+  color: #ffd700;
+  transition: all 0.3s ease;
 }
 
 /* Formulário */
+.form {
+  margin-bottom: 2rem;
+}
+
 .form h3 {
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-  color: #e0e0e0;
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .form-input-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+  position: relative;
 }
 
 .form input {
-  padding: 0.8rem;
-  border: 1px solid #ffffff;
-  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
   flex: 1;
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #2575fc;
+  box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.3);
+}
+
+.form input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .form button {
-  padding: 0.8rem;
-  background-color: #ff5e62;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ff5e62, #ff1e2e);
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
 }
 
 .form button:hover {
-  background-color: #ff1e2e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff1e2e, #ff5e62);
 }
 
-/* Clima */
+/* Dados do clima */
+#weather-data {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
 #weather-data h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 1.2rem;
-}
-
-#weather-data h2 {
-  margin: 1rem 0;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  margin: 0.5rem 0 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #temperature {
-  font-size: 3rem;
-  color: #ffd700; /* Destaque da temperatura */
-  margin-bottom: 0.5rem;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+#description-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 #description-container p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   text-transform: capitalize;
-  color: #f0f0f0;
-  font-weight: bold;
+  color: #ffffff;
+  font-weight: 500;
+  background: rgba(37, 117, 252, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#weather-icon {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+#weather-icon:hover {
+  transform: scale(1.1);
 }
 
 #details-container {
   display: flex;
   justify-content: space-around;
-  padding-top: 1rem;
+  padding: 1.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#humidity,
-#wind {
-  font-size: 1rem;
-  color: #e0e0e0;
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.detail-item i {
+  font-size: 1.5rem;
+  color: #2575fc;
+  margin-bottom: 0.3rem;
 }
 
 #country {
   margin-left: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+#country:hover {
+  transform: scale(1.1);
 }
 
 /* Sugestões */
 #suggestions {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#suggestions .form-input-container {
+  margin-bottom: 0.5rem;
 }
 
 #suggestions button {
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
   border: none;
-  background-color: #2575fc;
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
   color: #ffffff;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 #suggestions button:hover {
-  background-color: #6a11cb;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 label {
-  font-weight: bold;
-  color: #e0e0e0;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-align: left;
 }
 
 select {
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #ffffff;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
+  width: 100%;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+select:focus {
+  outline: none;
+  border-color: #2575fc;
+  box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.3);
 }
 
 option {
   background-color: #333;
+  padding: 0.5rem;
+}
+
+/* Mensagem de erro */
+#error-message {
+  background-color: rgba(255, 94, 98, 0.2);
+  border: 1px solid #ff5e62;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+#error-message p {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Loading overlay */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+
+#loading-overlay i {
+  font-size: 3rem;
+  color: #2575fc;
+  animation: spin 1s linear infinite;
+}
+
+/* Forecast container */
+#forecast-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(34, 34, 34, 0.85);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.5s ease;
+  box-sizing: border-box;
+}
+
+#forecast-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.forecast-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.forecast-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.forecast-date {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+.forecast-temp {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.forecast-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.forecast-desc {
+  font-size: 0.8rem;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
+/* Animações */
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Transições ao passar o mouse */
+
+.container, #weather-data, #suggestions, .forecast-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover, #weather-data:hover, #suggestions:hover, .forecast-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(106, 17, 203, 0.2);
+}
+
+/* Classe para esconder elementos */
+
+.hide {
+  display: none !important;
+}
+
+/* Classe para animação de entrada */
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Rodapé */
+
+.app-footer {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin-top: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-footer p {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+.credits {
+  font-family: monospace;
+  color: #ffffff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.credits:hover {
+  color: #ffd700;
 }

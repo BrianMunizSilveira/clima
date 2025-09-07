@@ -13,14 +13,15 @@ const tempElement = document.querySelector("#temperature span");
 const descElement = document.querySelector("#description");
 const weatherIconElement = document.querySelector("#weather-icon");
 const countryElement = document.querySelector("#country");
-const humidityElement = document.querySelector("#humidity span");
-const windElement = document.querySelector("#wind span");
+const humidityElement = document.querySelector("#humidity .detail-value");
+const windElement = document.querySelector("#wind .detail-value");
 const weatherContainer = document.querySelector("#weather-data");
 const errorMessageContainer = document.querySelector("#error-message");
-const loader = document.querySelector("#loader");
+const loadingOverlay = document.querySelector("#loading-overlay");
 const suggestionContainer = document.querySelector("#suggestions");
-const showSuggestionsBtn = document.querySelector("#show-suggestions");
-const closeSuggestionsBtn = document.querySelector("#close-suggestions");
+const themeToggle = document.querySelector("#theme-toggle");
+const forecastContainer = document.querySelector("#forecast-container");
+const forecastCards = document.querySelector(".forecast-cards");
 
 // Mapeamento de cidades por continente
 const citiesByContinent = {
@@ -115,10 +116,18 @@ const citiesByContinent = {
   ],
 };
 
-// Função para buscar os dados do clima
+// Função para buscar os dados do clima atual
 const getWeatherData = async (city) => {
   const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apikey}&lang=pt_br`;
   const response = await fetch(apiWeatherURL);
+  const data = await response.json();
+  return data;
+};
+
+// Função para buscar previsão do tempo para os próximos dias
+const getForecastData = async (lat, lon) => {
+  const apiForecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apikey}&lang=pt_br`;
+  const response = await fetch(apiForecastURL);
   const data = await response.json();
   return data;
 };
@@ -153,34 +162,92 @@ const weatherIconsMap = {
 
 // Função para mostrar os dados do clima
 const showWeatherData = async (city) => {
-  const data = await getWeatherData(city);
-  if (data.cod === "404") {
+  // Mostrar overlay de carregamento
+  loadingOverlay.classList.remove("hide");
+  errorMessageContainer.classList.add("hide");
+
+  try {
+    const data = await getWeatherData(city);
+    if (data.cod === "404") {
+      errorMessageContainer.classList.remove("hide");
+      weatherContainer.classList.add("hide");
+      forecastContainer.classList.add("hide");
+      loadingOverlay.classList.add("hide");
+      return;
+    }
+
+    // Atualizar dados do clima atual
+    cityElement.innerText = data.name;
+    tempElement.innerText = parseInt(data.main.temp);
+    descElement.innerText = data.weather[0].description;
+    humidityElement.innerText = `${data.main.humidity}%`;
+    windElement.innerText = `${data.wind.speed} Km/h`;
+
+    const weatherCondition = data.weather[0].main.toLowerCase();
+    const iconFile = weatherIconsMap[weatherCondition] || "default.svg";
+    weatherIconElement.setAttribute("src", `icons/${iconFile}`);
+
+    const countryCode = data.sys.country.toUpperCase();
+    countryElement.setAttribute(
+      "src",
+      `${apiCountryURL}${countryCode}/flat/64.png`
+    );
+
+    // Buscar e mostrar previsão para os próximos dias
+    const forecastData = await getForecastData(data.coord.lat, data.coord.lon);
+    showForecastData(forecastData);
+
+    // Buscar e aplicar imagem de fundo
+    const imageUrl = await getCityImageFromUnsplash(city);
+    if (imageUrl) {
+      document.body.style.backgroundImage = `url("${imageUrl}")`;
+    }
+
+    // Mostrar os containers de dados
+    weatherContainer.classList.remove("hide");
+    forecastContainer.classList.remove("hide");
+
+    // Adicionar classe para animação de entrada
+    weatherContainer.classList.add("fade-in");
+    forecastContainer.classList.add("fade-in");
+  } catch (error) {
+    console.error("Erro ao buscar dados do clima:", error);
     errorMessageContainer.classList.remove("hide");
-    return;
+  } finally {
+    // Esconder overlay de carregamento
+    loadingOverlay.classList.add("hide");
   }
+};
 
-  cityElement.innerText = data.name;
-  tempElement.innerText = parseInt(data.main.temp);
-  descElement.innerText = data.weather[0].description;
-  humidityElement.innerText = `${data.main.humidity}%`;
-  windElement.innerText = `${data.wind.speed} Km/h`;
+// Função para mostrar previsão do tempo para os próximos dias
+const showForecastData = (data) => {
+  // Limpar cards anteriores
+  forecastCards.innerHTML = "";
 
-  const weatherCondition = data.weather[0].main.toLowerCase();
-  const iconFile = weatherIconsMap[weatherCondition] || "default.svg";
-  weatherIconElement.setAttribute("src", `icons/${iconFile}`);
+  // Filtrar previsões para pegar apenas uma por dia (ao meio-dia)
+  const dailyForecasts = data.list.filter(item => item.dt_txt.includes("12:00:00")).slice(0, 5);
 
-  const countryCode = data.sys.country.toUpperCase();
-  countryElement.setAttribute(
-    "src",
-    `${apiCountryURL}${countryCode}/flat/64.png`
-  );
+  // Criar um card para cada dia
+  dailyForecasts.forEach(forecast => {
+    const date = new Date(forecast.dt * 1000);
+    const dayName = date.toLocaleDateString("pt-BR", { weekday: "short" });
+    const formattedDate = date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
 
-  const imageUrl = await getCityImageFromUnsplash(city);
-  if (imageUrl) {
-    document.body.style.backgroundImage = `url("${imageUrl}")`;
-  }
+    const weatherCondition = forecast.weather[0].main.toLowerCase();
+    const iconFile = weatherIconsMap[weatherCondition] || "default.svg";
 
-  weatherContainer.classList.remove("hide");
+    const forecastCard = document.createElement("div");
+    forecastCard.classList.add("forecast-card");
+
+    forecastCard.innerHTML = `
+      <p class="forecast-date">${dayName}, ${formattedDate}</p>
+      <img src="icons/${iconFile}" alt="${forecast.weather[0].description}" class="forecast-icon">
+      <p class="forecast-temp">${parseInt(forecast.main.temp)}&deg;C</p>
+      <p class="forecast-desc">${forecast.weather[0].description}</p>
+    `;
+
+    forecastCards.appendChild(forecastCard);
+  });
 };
 
 // Preencher as cidades com base no continente selecionado
@@ -204,6 +271,24 @@ continentSelect.addEventListener("change", () => {
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const city = citySelect.value || cityInput.value;
+  if (city) {
+    showWeatherData(city);
+  }
+});
+
+// Evento para pesquisa ao pressionar Enter
+cityInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    const city = cityInput.value;
+    if (city) {
+      showWeatherData(city);
+    }
+  }
+});
+
+// Evento para seleção de cidade no dropdown
+citySelect.addEventListener("change", () => {
+  const city = citySelect.value;
   if (city) {
     showWeatherData(city);
   }

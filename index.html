@@ -2,88 +2,154 @@
 <html lang="pt-br">
 
 <head>
+       
     <meta charset="UTF-8" />
+       
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+       
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clima</title>
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/responsive.css">
-    <!-- Google Fonts -->
+        <title>Previsão do Tempo em Tempo Real | ClimaTempo</title>
+       
+    <meta name="description"
+        content="Confira a previsão do tempo em tempo real para qualquer cidade do mundo. Informações precisas de clima, umidade, vento e temperatura na ClimaTempo." />
+       
+    <meta name="keywords" content="previsão do tempo, clima, tempo real, clima cidades, temperatura, umidade, vento" />
+       
+    <meta name="author" content="Brian M. Silveira" />
+       
+    <meta name="robots" content="index,follow" />
+       
+    <link rel="canonical" href="https://clima-eta-two.vercel.app/" />
+       
+    <link rel="stylesheet" href="./css/styles.css" />
+       
+    <link rel="stylesheet" href="./css/responsive.css" />
+        <!-- Google Fonts -->
+       
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+       
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <meta property="og:title" content="Clima">
-    <meta property="og:description" content="Descubra o clima de uma cidade">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1508556919487-845f191e5742?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+       
+    <link      
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+              rel="stylesheet"     />
+        <!-- Font Awesome -->
+       
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+       
+    <meta property="og:title" content="Previsão do Tempo em Tempo Real | ClimaTempo" />
+       
+    <meta property="og:description"
+        content="Descubra o clima de qualquer cidade do mundo em tempo real com precisão e rapidez." />
+       
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1508556919487-845f191e5742?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+       
+    <meta property="og:type" content="website" />
+       
     <script src="./js/script.js" defer></script>
-    <link rel="shortcut icon" href="./map-pin-line.svg" type="image/x-icon">
+       
+    <link rel="shortcut icon" href="./map-pin-line.svg" type="image/x-icon" />
 </head>
 
 <body>
-    <div class="container">
-      <div class="form">
-        <h3>Confira o clima de uma cidade:</h3>
-        <div class="form-input-container">
-          <input
-          type="text"
-          placeholder="Digite o nome de uma cidade"
-          id="city-input"
-        />
-        <button id="search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        </div>
-      </div>
-      <div id="weather-data" class="hide">
-        <h2><i class="fa-solid fa-location-dot"></i> <span id="city"></span> <img id="country"></img></h2>
-        <p id="temperature"><span></span>&deg;C</p>
-        <div id="description-container">
-          <p id="description"></p>
-          <img id="weather-icon" src="" alt="Condições atuais">
-        </div>
-        <div id="details-container">
-          <p id="humidity">
-            <i class="fa-solid fa-droplet"></i> 
-            <span></span>
-          </p>
-          <p id="wind">
-            <i class="fa-solid fa-wind"></i>
-            <span></span>
-          </p>
-        </div>
-      </div>
-      <div id="error-message" class="hide">
-        <p>Não foi possível encontrar o clima de uma cidade com este nome.</p>
-      </div>
-      <div id="loading-overlay" class="hide">
-        <i class="fa-solid fa-spinner"></i>
-      </div>      
-      <div id="suggestions">
-        <div class="form-input-container">
-          <label for="continent-select">Escolha um continente:</label>
-          <select id="continent-select">
-              <option value="">Selecione o continente</option>
-              <option value="america">América</option>
-              <option value="europa">Europa</option>
-              <option value="asia">Ásia</option>
-              <option value="africa">África</option>
-              <option value="oceania">Oceania</option>
-          </select>
-      </div>
-      <div class="form-input-container">
-          <label for="city-select">Escolha uma cidade:</label>
-          <select id="city-select" disabled>
-              <option value="">Selecione uma cidade</option>
-          </select>
-      </div>
-      </div>
-    </div>
-  </body>
+       
+        <header class="app-header" role="banner">
+                <div class="logo">
+                        <i class="fas fa-cloud-sun" aria-hidden="true"></i>
+                        <h1>ClimaTempo</h1>
+                    </div>
+                <p class="app-subtitle">Previsão do tempo em tempo real</p>
+            </header>
+
+        <main class="container" role="main">
+              <section class="form" aria-labelledby="form-title">
+                    <h2 id="form-title">Confira o clima de uma cidade</h2>
+                    <form aria-label="Formulário de busca de clima">
+                          <div class="form-input-container">
+                                <input             type="text"             placeholder="Digite o nome de uma cidade"    
+                                id="city-input"             name="city-input"             aria-required="true"          
+                          />
+                                <button id="search" class="pulse-button" aria-label="Buscar previsão do tempo">
+                                      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                    </button>
+                              </div>
+                        </form>
+                  </section>
+
+              <section id="weather-data" class="hide" aria-live="polite" aria-label="Dados do clima">
+                    <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span id="city"></span> <img
+                    id="country" alt="Bandeira do país"></img></h2>
+                    <div class="weather-main">
+                          <img id="weather-icon" src="" alt="Ícone representando as condições atuais do tempo"
+                    class="weather-icon-large" />
+                          <p id="temperature"><span></span><sup>&deg;C</sup></p>
+                        </div>
+                    <div id="description-container">
+                          <p id="description"></p>
+                        </div>
+                    <div id="details-container">
+                          <div class="detail-item" id="humidity">
+                                <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                                <div class="detail-info">
+                                      <span class="detail-label">Umidade</span>
+                                      <span class="detail-value"></span>
+                                    </div>
+                              </div>
+                          <div class="detail-item" id="wind">
+                                <i class="fa-solid fa-wind" aria-hidden="true"></i>
+                                <div class="detail-info">
+                                      <span class="detail-label">Vento</span>
+                                      <span class="detail-value"></span>
+                                    </div>
+                              </div>
+                        </div>
+                  </section>
+
+              <section id="error-message" class="hide" aria-live="assertive">
+                    <p>Não foi possível encontrar o clima de uma cidade com este nome.</p>
+                  </section>
+
+              <section id="loading-overlay" class="hide" aria-live="polite" aria-busy="true">
+                    <i class="fa-solid fa-spinner" aria-hidden="true"></i>
+                  </section>
+
+              <section id="suggestions" aria-label="Sugestões de cidades e continentes">
+                    <div class="form-input-container">
+                          <label for="continent-select">Escolha um continente:</label>
+                          <select id="continent-select" name="continent-select">
+                                  <option value="">Selecione o continente</option>
+                                  <option value="america">América</option>
+                                  <option value="europa">Europa</option>
+                                  <option value="asia">Ásia</option>
+                                  <option value="africa">África</option>
+                                  <option value="oceania">Oceania</option>
+                              </select>
+                        </div>
+                    <div class="form-input-container">
+                          <label for="city-select">Escolha uma cidade:</label>
+                          <select id="city-select" name="city-select" disabled>
+                                  <option value="">Selecione uma cidade</option>
+                              </select>
+                        </div>
+                  </section>
+            </main>
+
+        <section id="forecast-container" class="hide" aria-label="Previsão do tempo para os próximos dias">
+              <h2>Previsão para os próximos dias</h2>
+              <div class="forecast-cards">
+                    <!-- Forecast cards will be added here by JavaScript -->
+                  </div>
+            </section>
+
+        <footer class="app-footer" role="contentinfo">
+              <p><a class="credits" href="https://github.com/BrianMunizSilveira/clima/blob/main/LICENSE" target="_blank"
+                rel="noopener noreferrer">MIT License 2025</a></p>
+              <p>Desenvolvido por <a class="credits" href="https://github.com/BrianMunizSilveira" target="_blank"
+                rel="noopener noreferrer">Brian M. Silveira</a></p>
+            </footer>
+</body>
 
 </html>
